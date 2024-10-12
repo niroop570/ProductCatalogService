@@ -43,11 +43,11 @@ public class ProductController {
             }
             Product product = productService.getProductById(productId);
             if(product == null) {
-                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+                throw  new ResponseStatusException(HttpStatus.NOT_FOUND, "Product Not Found");
             }
             return new ResponseEntity<>(from(product), HttpStatus.OK);
         } catch (RuntimeException exception) {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            throw exception;
         }
     }
 
@@ -109,4 +109,10 @@ public class ProductController {
         }
         return productDto;
     }
+
+//    @ExceptionHandler(ResponseStatusException.class)
+//    public ResponseEntity<String> handleExceptions(ResponseStatusException exception) {
+//        return new ResponseEntity<>(exception.getMessage(),exception.getStatusCode());
+//    }
+
 }

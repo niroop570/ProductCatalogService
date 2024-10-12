@@ -40,7 +40,9 @@ public class ProductServiceImpl implements ProductService {
 
     public Product getProductById(long id) {
         FakeStoreProductDto fakeStoreProductDto = fakeStoreApiClient.getProductById(id);
-        return from(fakeStoreProductDto);
+        if (fakeStoreProductDto != null)
+            return from(fakeStoreProductDto);
+        return null;
     }
 
     public Product addProduct(Product product) {
