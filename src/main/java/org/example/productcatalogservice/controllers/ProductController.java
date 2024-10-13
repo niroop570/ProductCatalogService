@@ -55,7 +55,7 @@ public class ProductController {
     public ResponseEntity<ProductDto> addProduct(@RequestBody ProductDto productDto) {
         try {
             if(productDto == null) {
-                throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Product can not be empty positive integer");
+                throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Product can not be empty");
             }
 //            if(productDto.getId() == null) {
 //                throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Product id must be a positive integer");
@@ -87,7 +87,7 @@ public class ProductController {
             Category category = new Category();
             category.setName(productDto.getCategory().getName());
             category.setDescription(productDto.getCategory().getDescription());
-            category.setId(productDto.getId());
+            category.setId(productDto.getCategory().getId());
             product.setCategory(category);
         }
         return product;
@@ -104,7 +104,7 @@ public class ProductController {
             CategoryDto categoryDto = new CategoryDto();
             categoryDto.setName(product.getCategory().getName());
             categoryDto.setDescription(product.getCategory().getDescription());
-            categoryDto.setId(product.getId());
+            categoryDto.setId(product.getCategory().getId());
             productDto.setCategory(categoryDto);
         }
         return productDto;
